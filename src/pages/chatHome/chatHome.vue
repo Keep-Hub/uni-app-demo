@@ -5,18 +5,18 @@
 						<view class="left msg" v-if="e.id ==1">
 							<image :src="e.img"></image>
 							<view class="nr">
-								<view class="neir">
-									{{e.neir}}
-								</view>
+								<video v-if="e.video !== ''" class="neir ve"  id="myVideo" :src="e.video"
+								     :controls="true"></video>
+								<rich-text v-else class="neir" :nodes="e.neir"></rich-text>
 								<view class="nt">{{e.name}} {{e.sendTime}}</view>
 							</view>
 						</view>
 						<view class="right msg" v-if="e.id==2">
 							<image :src="e.img"></image>
 							<view class="nr">
-								<view class="neir">
-									{{e.neir}}
-								</view>
+								<video v-if="e.video !== ''" class="neir ve"  id="myVideo" :src="e.video"
+								     :controls="true"></video>
+								<rich-text v-else class="neir" :nodes="e.neir"></rich-text>
 								<view class="nt">{{e.sendTime}}</view>
 							</view>					
 						</view>
@@ -32,7 +32,7 @@
 							<image src="../../static/send.png" mode="aspectFit" @tap="sendMsg"></image> -->
 							<textarea @input="sendChange()" type="text" confirm-type="send" class="chat-send"  v-model="chatm" auto-height="true" show-confirm-bar="false" maxlength="-1" />
 							<!-- <image class="smile-icon" src="../../static/smile.png" mode="aspectFit"></image> -->
-							<uni-icons class="smile-icon" type="navigate" size="24"></uni-icons>
+							<uni-icons class="smile-icon" type="navigate" size="24" @click="sendVideo()"></uni-icons>
 							<button v-if="showSendBtn" class="send-icon" type="default" size="mini" @tap="sendMsg()">发送</button>
 							<uni-icons v-else class="plus-icon" type="plus" size="24"></uni-icons>
 							
@@ -62,6 +62,7 @@
 						id: 1,
 						img: '../../static/feicheng.png',
 						name: '飞橙',
+						video: '',
 						neir: '我刚刚说了话',
 						sendTime: '14:30'
 					},
@@ -69,6 +70,7 @@
 						id: 2,
 						img: '../../static/feicheng.png',
 						name: '飞橙',
+						video: '',
 						neir: '我刚刚说了话我刚刚说了话我刚刚说了话我刚刚说了话我刚刚说了话我刚刚说了话',
 						sendTime: '14:30'
 					},
@@ -76,6 +78,7 @@
 						id: 2,
 						img: '../../static/feicheng.png',
 						name: '飞橙',
+						video: '',
 						neir: '我刚刚说了话',
 						sendTime: '14:30'
 					},
@@ -83,6 +86,7 @@
 						id: 1,
 						img: '../../static/feicheng.png',
 						name: '飞橙',
+						video: '',
 						neir: '我刚刚说了话',
 						sendTime: '14:30'
 					},
@@ -91,6 +95,7 @@
 						id: 2,
 						img: '../../static/feicheng.png',
 						name: '飞橙',
+						video: '',
 						neir: '我刚刚说了话',
 						sendTime: '14:30'
 					},
@@ -98,6 +103,7 @@
 						id: 1,
 						img: '../../static/feicheng.png',
 						name: '飞橙',
+						video: '',
 						neir: '我刚刚说了话',
 						sendTime: '14:30'
 					},
@@ -105,6 +111,7 @@
 						id: 2,
 						img: '../../static/feicheng.png',
 						name: '飞橙',
+						video: '',
 						neir: '我刚刚说了话',
 						sendTime: '14:30'
 					},
@@ -112,6 +119,7 @@
 						id: 1,
 						img: '../../static/feicheng.png',
 						name: '飞橙',
+						video: '',
 						neir: '我刚刚说了话',
 						sendTime: '14:30'
 					},
@@ -119,6 +127,7 @@
 						id: 2,
 						img: '../../static/feicheng.png',
 						name: '飞橙',
+						video: '',
 						neir: '我刚刚说了话',
 						sendTime: '14:30'
 					}
@@ -144,6 +153,30 @@
 			this.scrollToBottom();
 		},
 		methods: {
+			sendVideo() {
+				this.scrollToBottom()
+				let reg = /^(?!(\s+$))/ //不能全是空格
+				if (1) {
+					this.scrollAnimation = true
+					const a = {
+						id: this.uid,
+						fid: this.fid,
+						img: '../../static/feicheng.png',
+						name: '飞橙',
+						video: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126-lite.m4v',
+						neir: "",
+						sendTime: this.getTime()
+					}
+					this.chat.push(a);
+					// 发送信息到socket
+					this.socket.emit('msg', a)
+					this.$nextTick(function(){
+						// this.scrollAnimation = true
+						this.scrollToBottom();   //创建后调用回到底部方法
+					})
+					this.showSendBtn = false
+				}
+			},
 			getTime:function(){
 			var date = new Date(),
 			year = date.getFullYear(),
@@ -192,6 +225,7 @@
 						fid: this.fid,
 						img: '../../static/feicheng.png',
 						name: '飞橙',
+						video: '',
 						neir: this.chatm,
 						sendTime: this.getTime()
 					}
@@ -240,6 +274,7 @@
 				}
 				.nr{
 					.neir{
+						display: block;
 						max-width:420rpx;
 						padding:20rpx 28rpx;
 						min-height:40rpx;
@@ -248,6 +283,10 @@
 						line-height:40rpx;
 						word-break: break-all;
 						word-wrap: break-word;
+						.imgc{
+							width: 200rpx;
+							height: 200rpx;
+						}
 					}
 					.nt{
 						padding-top: 8rpx;
