@@ -1,0 +1,88 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/init/init",
+			"style": {
+				"navigationBarTitleText": "入口页"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "微聊"
+			}
+		},
+		{
+			"path": "pages/friends/Friends",
+			"style": {
+				"navigationBarTitleText": "通讯录"
+			}
+		},
+		{
+			"path": "pages/live/live",
+			"style": {
+				"navigationBarTitleText": "直播"
+			}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "我"
+			}
+		},
+		{
+			"path": "pages/guidePage/guidePage",
+			"style": {
+				"navigationBarTitleText": "引导页",
+				"titleNView": false,
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/test/test",
+			"style": {
+				"navigationBarTitleText": "测试页"
+			}
+		},
+		{
+			"path": "pages/chatHome/chatHome",
+			"style": {
+				"navigationBarTitleText": "聊天"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "飞橙科技",
+		"navigationBarBackgroundColor": "#EB9D12"
+	},
+	"tabBar": {
+	    "color": "#7A7E83",
+	    "selectedColor": "#EB9D12",
+	    "borderStyle": "black",
+	    "backgroundColor": "#ffffff",
+	    "list": [{
+	        "pagePath": "pages/index/index",
+	        "iconPath": "static/feicheng.png",
+	        "selectedIconPath": "static/feicheng.png",
+	        "text": "微聊"
+	    }, {
+	        "pagePath": "pages/friends/Friends",
+	        "iconPath": "static/feicheng.png",
+	        "selectedIconPath": "static/feicheng.png",
+	        "text": "通讯录"
+	    }, {
+	        "pagePath": "pages/live/live",
+	        "iconPath": "static/feicheng.png",
+	        "selectedIconPath": "static/feicheng.png",
+	        "text": "直播"
+	    }, {
+	        "pagePath": "pages/mine/mine",
+	        "iconPath": "static/feicheng.png",
+	        "selectedIconPath": "static/feicheng.png",
+	        "text": "我"
+	    }]
+	}
+}
